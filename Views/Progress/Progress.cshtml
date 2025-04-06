@@ -1,0 +1,21 @@
+﻿@model List<E_LearningProject.Models.MyLearningProgressViewModel>
+
+@{
+    ViewData["Title"] = "Course Progress";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Your Course Progress</h2>
+
+    @foreach (var course in Model)
+    {
+        <div class="mt-4">
+            <h5>@course.CourseName</h5>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: @course.Progress%" aria-valuenow="@course.Progress" aria-valuemin="0" aria-valuemax="100">
+                    @course.Progress%
+                </div>
+            </div>
+        </div>
+    }
+</div>

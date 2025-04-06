@@ -1,0 +1,156 @@
+﻿@model E_LearningProject.Models.QuizViewModel
+
+@{
+    ViewData["Title"] = "Quiz Details";
+}
+
+<div class="container mt-5 pt-4">
+    <div class="row  mt-3 p-3 justify-content-center align-items-center" style="background-color:#D9D9D9; min-height: 590px;">
+    
+    <h2 class="text-center">Quiz: Test Your Knowledge on @Model.CourseName</h2>
+
+    @if (Model.Questions != null && Model.Questions.Any())
+    {
+        <form id="quiz-form">
+            @foreach (var question in Model.Questions)
+                {
+                    <li>
+                    <strong>@question.QuestionText</strong>
+                    <select class="form-control" 
+                            name="q_@question.Id"
+                            data-correct-answer="@question.CorrectAnswer">
+                        <option value="">Select Answer</option>
+                        <option value="A">@question.OptionA</option>
+                        <option value="B">@question.OptionB</option>
+                        <option value="C">@question.OptionC</option>
+                    </select>
+                    <p id="result_@question.Id" class="mt-2 text-danger"></p>
+                </li>
+                }
+            <button type="button" id="submit-quiz" class="w-100 btn btn-primary mt-3">Submit Quiz</button>
+            <p id="quiz-result" class="mt-3"></p>
+        </form>
+
+        <!-- Mark as Completed Button -->
+        <button id="complete-course"  data-id="@Model.CourseId" class="w-100 btn btn-success mt-4" disabled>
+            Mark as Completed
+        </button>
+
+        <button type="button" id="retake-quiz" class="w-100 btn btn-secondary mt-2" style="display:none;">
+            Retake Quiz
+        </button>
+    }
+    else
+    {
+        <p class="text-center text-danger">No quiz questions available for this course.</p>
+    }
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // ✅ Handle quiz submission
+    $('#submit-quiz').on('click', function () {
+        let totalQuestions = @Model.Questions.Count;
+        let score = 0;
+
+        // ✅ Loop through all questions and check answers
+        $('select[name^="q_"]').each(function () {
+            let selectedAnswer = $(this).val();
+            let correctAnswer = $(this).data('correct-answer');
+            let resultElement = $(this).siblings('p');
+
+            // ✅ Show Correct or Incorrect Text Only After Clicking Submit
+            if (selectedAnswer === correctAnswer) {
+                resultElement.html("<span class='text-success'>✅ Correct Answer!</span>");
+                score++;
+            } else {
+                resultElement.html("<span class='text-danger'>❌ Incorrect! Try Again.</span>");
+            }
+
+            // ✅ Disable the input fields after submission
+            $(this).prop('disabled', true);
+        });
+
+        // ✅ Calculate percentage
+        let percentage = (score / totalQuestions) * 100;
+        let resultText = `You scored ${percentage.toFixed(2)}%`;
+
+        // ✅ If user scores >= 70%, enable Mark as Completed button
+        if (percentage >= 70) {
+            $('#quiz-result').html(`
+                    <span class="text-success">
+                        🎉 Congratulations! You have passed this course.<br>
+                        Your Score: ${percentage.toFixed(2)}%
+                    </span>
+                `);
+
+            // ✅ Show the Mark as Completed button only after passing
+            $('#complete-course').show();
+
+            $('#complete-course').prop('disabled', false);
+
+            // ✅ Send AJAX to update progress to 70%
+            $.ajax({
+                url: '@Url.Action("UpdateProgress", "Courses")',
+                type: 'POST',
+                data: {
+                    courseId: @Model.CourseId,
+                    progress: 70
+                }
+            });
+        }
+        else {
+            $('#quiz-result').html(`
+                    <span class="text-danger">
+                        ❌ Sorry! You scored ${percentage.toFixed(2)}%.<br>
+                        You need at least 70% to pass. Try Again.
+                    </span>
+                `);
+
+            // ✅ Show Retake Quiz Button
+            $('#retake-quiz').show();
+        }
+
+        // ✅ Disable Submit Button After Submission
+        $('#submit-quiz').prop('disabled', true);
+    });
+
+    // ✅ Handle Mark as Completed
+    $('#complete-course').on('click', function () {
+        $.ajax({
+            url: '@Url.Action("UpdateProgress", "Courses")',
+            type: 'POST',
+            data: {
+                courseId: @Model.CourseId,
+                progress: 100
+            },
+            success: function (response) {
+                // ✅ Disable the Mark as Completed button after clicking
+                $('#complete-course').prop('disabled', true);
+
+                // ✅ Redirect to the My Learning page in the Account controller
+                window.location.href = '@Url.Action("MyLearning", "Account")';
+            },
+        });
+
+    });
+
+    // ✅ Handle Retake Quiz
+    $('#retake-quiz').on('click', function () {
+        // ✅ Reset all fields and results
+        $('select[name^="q_"]').val('').prop('disabled', false);
+        $('p[id^="result_"]').html('');
+        $('#quiz-result').html('');
+        $('#submit-quiz').prop('disabled', false);
+        $('#retake-quiz').hide();
+        $('#complete-course').hide();
+    });
+
+    // ✅ Initially hide the Mark as Completed button and Retake button
+    $('#complete-course').hide();
+    $('#retake-quiz').hide();
+</script>
+
+

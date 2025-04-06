@@ -1,0 +1,141 @@
+﻿@using E_LearningProject.Entities
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+ @model List<E_LearningProject.Entities.Courses>
+
+@{
+    ViewData["Title"] = "Courses";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    var user = await UserManager.GetUserAsync(User);
+
+    <!-- Courses Section -->
+    <div class="container-fluid mt-5">
+        <div class="align-items-center" style="background-color:#F5F5F5; padding: 50px 20px; min-height:580px;">
+            &nbsp;&nbsp;
+            <h5 style="color:darkblue; font-weight:bold">Welcome, @user.FullName!</h5>  <!-- This will now display the user's name -->
+            <!-- Courses text at the top center -->
+            <div class="d-flex justify-content-center" style="padding-top: 10px;">
+                <img src="~/images/sqllearning.png" style="width:60px; height:40px; border-radius:20%; margin-right:10px;" />
+                <h2 style="">SQL Courses</h2>
+            </div>
+
+            <!-- Spacing to prevent overlap -->
+            <div style="height: 20px;"></div>
+
+            <!-- Cards Section -->
+            <div class="container mt-4">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+                    @if (Model == null || !Model.Any())
+                    {
+                        <h3>No courses yet.</h3>
+                    }
+                    else
+                    {
+                        @foreach (var course in Model)
+                        {
+                            <div class="col">
+                                <div class="card h-100" style="background-color:#D9D9D9;">
+
+                                    <div class="d-flex justify-content-center pb-4">
+                                        @if (!string.IsNullOrEmpty(course.ImageUrl))
+                                        {
+                                            <img src="@course.ImageUrl" alt="Course Image" style="width:100%;  height:200px; object-fit:cover; border-radius:10px;" />
+                                        }
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">@course.CourseName</h5>
+                                        <p class="card-text">@course.Description</p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center pb-4">
+                                        <a href="@Url.Action("CourseDetails", "Courses", new { id = course.Id })" class="btn text-white mt-4" style="background-color:#7A046A; font-family:inria serif; font-weight: bold; border-radius:10px;">
+                                            View Course
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+            <!-- Add New Course Button - Visible only if the user is an Admin -->
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="text-end mt-5">
+                    <a href="@Url.Action("Create", "Courses")" class="btn text-white" style="background-color:#7A046A; font-family:inria serif; font-weight: bold; border-radius:10px;">
+                        Add New Course
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Testimonial Section -->
+    <div class="position-relative d-flex flex-column align-items-center" style="background-color:#D9D9D9; padding: 50px 20px; min-height:580px;">
+        <!-- Courses text at the top center -->
+        <div class="position-absolute pt-5 top-0 start-50 translate-middle-x" style="text-align: center; padding-top: 10px;">
+            <h2 style="">Students Success Story</h2>
+        </div>
+
+        <!-- Spacing to prevent overlap -->
+        <div style="height: 25px;"></div>
+
+        <!-- Cards Section -->
+        <div class="container mt-5">
+            <div class="row row-cols-1 p-4 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- Card 1 -->
+                <div class="col">
+                    <div class="card h-100" style="background-color: #F1D5D5;">
+                        <div class="d-flex justify-content-center">
+                            <img src="~/images/testimag2.png" style="height:200px; border-radius:100%; width: 200px;" class="card-img-top pt-2" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-title">"This course helped me landed my first database administrator job!"</p>
+                            <p class="card-text">
+                                <span style="font-weight: bold; display: block; line-height: 0.7;">Sarah K.</span>
+                                <span style="font-size: 14px; line-height: 0.7;">Data Analyst</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col">
+                    <div class="card h-100" style="background-color:#F1D5D5;">
+                        <div class="d-flex justify-content-center">
+                            <img src="~/images/testimag1.png" style="height:195px; border-radius:100%; width: 200px;" class="card-img-top pt-2" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-title">"Clear explanation and practical exercise made learning SQL easy"</p>
+                            <p class="card-text">
+                                <span style="font-weight: bold; display: block; line-height: 0.7;">Kelvin M.</span>
+                                <span style="font-size: 14px; line-height: 0.7;">Student</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col">
+                    <div class="card h-100" style="background-color: #F1D5D5;">
+                        <div class="d-flex justify-content-center">
+                            <img src="~/images/testimag2.png" style="height:200px; border-radius:100%; width: 200px;" class="card-img-top pt-2" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-title">"Perfect for beginners! The interactive exercise are fantastic."</p>
+                            <p class="card-text">
+                                <span style="font-weight: bold; display: block; line-height: 0.7;">Lisa M.</span>
+                                <span style="font-size: 14px; line-height: 0.7;">Student</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

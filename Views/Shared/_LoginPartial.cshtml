@@ -1,0 +1,53 @@
+﻿@using E_LearningProject.Entities
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext dbContext
+@await Component.InvokeAsync("Notification")
+
+
+<ul class="navbar-nav">
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        var user = await UserManager.GetUserAsync(User);
+        var profilePicture = user?.ProfilePicturePath ?? "/images/default-pic.png"; // Default profile pic
+
+
+        <!-- My Learning -->
+        <li class="nav-item">
+            <a class="nav-link mt-lg-3" style="color:#1F00BD; font-family:inknut Antiqua; margin-right:8px;"
+               asp-area="" asp-controller="Account" asp-action="MyLearning">My Learning</a>
+        </li>
+
+        <!-- Profile Picture Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center mt-2" href="#" id="profileDropdown" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="@Url.Content(profilePicture)" class="profile-pic me-2 mt-2" alt="Profile Picture"
+                     style="width:30px; height:30px; border-radius:50%;" />
+                <span>Hello, @user?.FullName!</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                <li><a class="dropdown-item" style="color:#1F00BD; font-family:inknut Antiqua; margin-right:20px;" asp-area="" asp-controller="Account" asp-action="EditProfile">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutform" class="nabar-right">
+                        <button type="submit" class="dropdown-item" style="color:#1F00BD; font-family:inknut Antiqua; margin-right:20px;">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <!-- Default (Before Login) -->
+        <li class="nav-item mt-3">
+            <a class="nav-link" style="color:#1F00BD; font-family:inknut Antiqua; margin-right:10px;"
+               asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item mt-3">
+            <a class="nav-link" style="color:#1F00BD;font-family:inknut Antiqua; margin-right:50px;"
+               asp-area="" asp-controller="Account" asp-action="Signup">Sign Up</a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,44 @@
+﻿@model List<E_LearningProject.Entities.Notification>
+@{
+    ViewData["Title"] = "Notifications";
+}
+<div class="container mt-5 pt-4" style="background-color:#D9D9D9; padding: 80px 20px 50px; min-height: 100vh">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card h-100 p-3" style="background-color:#FFFFFF; margin-top: 40px;">
+
+                <h4 style="text-align:center; color:darkblue;">All Notifications</h4>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Message</th>
+                            <th>Date Added</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var n in Model)
+                        {
+                            <tr>
+                                <td>@n.Message</td>
+                                <td>@n.CreatedAt.ToString("g")</td>
+                                <td>
+                                    @if (n.IsRead)
+                                    {
+                                        <span class="text-success">Read</span>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="MarkNotificationAsRead" asp-route-notificationId="@n.Id" class="btn btn-sm btn-primary">Mark as Read</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

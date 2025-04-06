@@ -1,0 +1,64 @@
+﻿@model E_LearningProject.Models.QuizViewModel
+
+@{
+    ViewData["Title"] = "Create New Quiz Question";
+}
+
+<div class="container mt-5 pt-4">
+    <div class="row justify-content-center align-items-center" style="background-color:#D9D9D9; min-height: 590px;">
+
+        <div class="d-flex justify-content-center mt-5" style="padding-top: 10px;">
+        <h2>Create Quiz Question for @Model.CourseName</h2>
+        </div>
+
+    <form method="post" class="mt-4" asp-action="Create">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="CourseId" />
+
+        <div class="form-group">
+            <label for="QuestionText">Question Text</label>
+            <textarea asp-for="QuestionText" class="form-control"></textarea>
+            <span asp-validation-for="QuestionText" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="OptionA">Option A</label>
+            <input type="text" asp-for="OptionA" class="form-control"/>
+            <span asp-validation-for="OptionA" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="OptionB">Option B</label>
+            <input type="text" asp-for="OptionB" class="form-control"/>
+            <span asp-validation-for="OptionB" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="OptionC">Option C</label>
+            <input type="text" asp-for="OptionC" class="form-control"/>
+             <span asp-validation-for="OptionC" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="CorrectAnswer">Correct Answer</label>
+            <select asp-for="CorrectAnswer" class="form-control">
+                <option value="">Select Correct Answer</option>
+                <option value="A">Option A</option>
+                <option value="B">Option B</option>
+                <option value="C">Option C</option>
+            </select>
+            <span asp-validation-for="CorrectAnswer" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group mt-3">
+                <button style="background-color:#7A046A; font-family:inria serif; font-weight: bold; border-radius:10px;" type="submit">Save Quiz Question</button>
+        </div>
+    </form>
+
+    </div>
+</div>

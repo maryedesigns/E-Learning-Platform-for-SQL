@@ -1,0 +1,96 @@
+﻿@model E_LearningProject.Models.SignupViewModel
+
+@{
+    ViewData["Title"] = "Signup";
+}
+
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center align-items-center" style="background-color:#D9D9D9; min-height: 590px;">
+
+        <!-- Image Section (Left) on large screens, at the bottom on small screens -->
+        <div class="col-lg-6 text-center order-3 order-lg-0 mb-3 mb-lg-0">
+            <img src="~/images/aboutusimage.png" class="img-fluid rounded" alt="About Us Image">
+        </div>
+
+        <!-- Form Section (Right) on large screens, at the top on small screens -->
+        <div class="col-md-6" style="padding:40px;">
+            <!-- Title at the top of the form -->
+            <h4 class="text-center mt-3 mb-lg-0" style="padding-top:5px; font-weight:bold; font-family:inria serif;">Create an account to get started</h4>
+
+            <!-- Spacing to prevent overlap on small screens -->
+            <div style="height: 25px;"></div>
+
+            <section>
+                <form asp-action="Signup" id="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <!-- Email Input with Font Awesome Icon -->
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input asp-for="FullName" class="form-control" placeholder="full Name" />
+                    </div>
+
+                    <!-- Email Input with Font Awesome Icon -->
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    </div>
+
+                    <!-- Password Input with Font Awesome Icon -->
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input asp-for="Password" class="form-control" placeholder="password" />
+                    </div>
+
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="confirm password" />
+                    </div>
+
+                    <div>
+                        <button id="signup-submit" type="submit" class="w-100 btn btn-lg" style="background-color:#7A046A; color:white; font-family:inria serif; font-size: 18px; font-weight: bold; border-radius:10px;">Create Account</button>
+                    </div>
+                </form>
+            </section>
+
+            &nbsp;&nbsp;
+
+            <div style="text-align: center;">
+                <p style="display: inline-block;">Already have an account?</p>
+                <a class="nav-link" asp-action="Login" style="display: inline-block; color:#1F00BD; font-family:inknut Antiqua;">Login</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Check if TempData contains a success message
+        var successMessage = "@TempData["SignupSuccess"]";
+
+        if (successMessage && successMessage !== "") {
+            Swal.fire({
+                icon: "success",
+                title: "Account Created Successfully!",
+                text: "Welcome onboard !!",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#1F00BD"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/Account/StartLearning"; // Redirect to Start Learning page
+                }
+            });
+        }
+    </script>
+}
+

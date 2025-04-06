@@ -1,0 +1,75 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+    .notification-icon-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .notification-dot {
+        position: absolute;
+        top: 0; /* Align the dot directly with the top edge of the icon */
+        right: 0; /* Align the dot directly with the right edge of the icon */
+        width: 10px; /* Dot size */
+        height: 10px; /* Dot size */
+        border-radius: 50%; /* Makes it round */
+        background-color: red; /* Dot color */
+        border: 1px solid white; /* Optional: gives a slight border to the dot */
+    }
+
+
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+/*body {
+  margin-bottom: 60px;
+}*/
+
+.small-text {
+    font-size: 0.75em; /* Makes it smaller */
+    display: block; /* Ensures it appears on a new line */
+    color: #3C1DE9; /* Optional: Change color for emphasis */
+    margin-left: 12px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.footer {
+    background-color: #4D4D4D;
+    color: white;
+    margin-top: auto; /* Makes sure footer sticks to the bottom */
+    padding-bottom: 5px;
+}
+
+.container {
+    margin-bottom: 5px;
+}
+
+#about {
+    background-color: #FFDCD1;
+    text-align: center
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}

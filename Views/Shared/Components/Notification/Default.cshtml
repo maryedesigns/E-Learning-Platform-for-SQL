@@ -1,0 +1,63 @@
+﻿@model List<E_LearningProject.Entities.Notification>
+@{
+    var unreadCount = ViewBag.UnreadCount as int? ?? 0;
+}
+
+<li class="nav-item dropdown">
+    <a class="nav-link position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="notification-icon-container" style="position:relative;">
+            <img src="~/images/notificationicon.jpg" class="icon mt-lg-2" alt="Notifications" style="width:40px; height:40px; border-radius: 20px; border: 1px dotted black;" />
+            @if (unreadCount > 0)
+            {
+                <span class="notification-dot position-absolute top-50 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                </span>
+            }
+        </div>
+
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-end" style="width: 300px; max-height: 300px; overflow-y: auto;">
+        @if (Model != null && Model.Count > 0)
+        {
+            @foreach (var n in Model)
+            {
+                <li class="dropdown-item">
+                    <a href="/Notifications/Details/@n.Id" class="text-decoration-none text-dark">
+                        <div class="d-flex justify-content-between">
+                            <div class="notification-message">
+                                <strong>@n.Message</strong><br />
+                                <small>@n.CreatedAt.ToString("g")</small>
+                            </div>
+                            @if (!n.IsRead)
+                            {
+                                <span class="badge bg-danger rounded-circle" style="width:10px; height:10px;"></span>
+                            }
+                        </div>
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+            }
+
+            <li class="dropdown-item text-center">
+                <a href="@Url.Action("Index", "Notification")" class="btn text-white" style="background-color:#7A046A; font-family:inria serif; font-weight: bold; border-radius:10px;">
+                    See all notifications
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="dropdown-item text-muted text-center">No new notifications at this time</li>
+        }
+    </ul>
+</li>
+
+<style>
+    /* Style to wrap the text */
+    .notification-message {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+

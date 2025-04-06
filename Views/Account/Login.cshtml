@@ -1,0 +1,74 @@
+﻿@model E_LearningProject.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center align-items-center" style="background-color:#D9D9D9; min-height: 590px;">
+
+        <!-- Image Section (Left) on large screens, at the bottom on small screens -->
+        <div class="col-lg-6 text-center order-3 order-lg-0 mb-3 mb-lg-0">
+            <img src="~/images/aboutusimage.png" class="img-fluid rounded" alt="About Us Image">
+        </div>
+
+        <!-- Form Section (Right) on large screens, at the top on small screens -->
+        <div class="col-md-6" style="padding:40px;">
+            <!-- Title at the top of the form -->
+            <h4 class="text-center mt-3 mb-lg-0" style="padding-top:22px; font-weight:bold; font-family:inria serif;">Login to continue your learning journey</h4>
+
+            <!-- Spacing to prevent overlap on small screens -->
+            <div style="height: 25px;"></div>
+
+            <section>
+                <form asp-action="Login" id="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <!-- Email Input with Font Awesome Icon -->
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+                    </div>
+
+                    <!-- Password Input with Font Awesome Icon -->
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input asp-for="Password" class="form-control" placeholder="password" />
+                    </div>
+
+                    <div class="mb-3">
+                        <a asp-action="ForgotPassword" asp-controller="Account" class="text-primary">
+                            Forgot Password?
+                        </a>
+                    </div>
+
+                    <div>
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg" style="background-color:#7A046A; color:white; font-family:inria serif; font-size: 18px; font-weight: bold; border-radius:10px;">Login</button>
+                    </div>
+                </form>
+            </section>
+
+            &nbsp;&nbsp;
+
+            <h6 style="text-align:center;">Other Login Option</h6>
+            <div class="text-center" style="padding:10px;">
+                <img src="~/images/facebook.png" style="margin-right:10px;" />
+                <img src="~/images/gmail.png" style="margin-right:10px;" />
+                <img src="~/images/twitter.png" />
+            </div>
+
+            <div style="text-align: center;">
+                <p style="display: inline-block;">Don’t have an account?</p>
+                <a class="nav-link" asp-action="Signup" style="display: inline-block; color:#1F00BD; font-family:inknut Antiqua;">SignUp</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+  @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

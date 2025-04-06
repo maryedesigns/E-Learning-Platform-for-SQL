@@ -1,0 +1,233 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Main Section -->
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center align-items-center d-flex; flex-column-reverse flex-lg-row" style="background-color:#D9D9D9; min-height: 590px;">
+        <h1 class="col-lg-12 order-3 order-lg-0 text-center" style="margin-bottom: 10px; padding-top:22px;">
+            <marquee>Learn & Practice the Basics of SQL</marquee>
+        </h1>
+
+        <!-- Text Section -->
+        <div class="col-lg-6 order-2 order-lg-1">
+            <div class="p-4 text-center text-lg-start">
+                <div class="card-body">
+                    <h1 class="" style="font-family: inria serif; color:#1F00BD">
+                        Master SQL fundamentals with interactive lessons and hands-on practices.
+                    </h1>
+                    <p style="font-style:italic">An E-learning Platform for learning Basic SQL Concepts at Ease.</p>
+                    @* <div class="d-flex justify-content-center justify-content-lg-start mt-3">
+                        <button class="btn text-white mt-4" style="background-color:#7A046A; font-family:inria serif; font-size: 18px; font-weight: bold; border-radius:10px;">
+                            Get Started
+                        </button>
+                    </div> *@
+                    <div class="d-flex justify-content-center justify-content-lg-start mt-3">
+                        <a asp-action="Signup" asp-controller="Account"
+                           class="btn text-white mt-4" style="background-color:#7A046A; font-family:inria serif; font-size: 18px; font-weight: bold; border-radius:10px;">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Section -->
+        <div class="col-lg-6 order-1 order-lg-2 text-center">
+            <img src="~/images/aboutusimage.png" class="img-fluid rounded" alt="About Us Image">
+        </div>
+    </div>
+</div>
+
+<!-- About Us Section -->
+<div class="">
+    <div class="p-4" style="background-color:#FFDCD1; min-height:590px;">
+        <div class="card-body">
+            <div class="text-center">
+                <h2>About Us</h2>
+            </div>
+            <div class="row align-items-center mt-4">
+                <!-- Image Section -->
+                <div class="col-lg-6 text-center">
+                    <img src="~/images/aboutsqllearning.png" class="img-fluid rounded w-100" style="height: 350px; " alt="Main Image">
+                </div>
+
+                <!-- Text Section with Right Padding -->
+                <div class="col-lg-6" style="text-align:justify; padding-right: 30px;">
+                    <p>
+                        SQL Learning Hub is an interactive e-learning platform designed to help students master the fundamentals of Structured Query Language (SQL). It provides a structured curriculum covering key SQL concepts such as database queries, data manipulation, and optimization.
+                    </p>
+                    <p>
+                        Ideal for beginners and intermediate learners looking to build a strong foundation in database management and querying. Whether for academic learning or professional upskilling, this platform ensures a comprehensive and engaging SQL learning experience.
+                    </p>
+                </div>
+            </div>
+            <h2 class="col-lg-12 order-3 order-lg-0 text-center" style="margin-bottom: 10px; padding-top:22px;">
+                <marquee><i>"Empowering learners with SQL skills for a data-driven world".</i></marquee>
+            </h2>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Courses Section -->
+<div class="position-relative d-flex flex-column align-items-center" style="background-color:#F5F5F5; padding: 50px 20px; min-height:580px;">
+    <!-- Courses text at the top center -->
+    <div class="position-absolute pt-4 top-0 start-50 translate-middle-x" style="text-align: center; padding-top: 10px;">
+        <h2 style="">Courses</h2>
+    </div>
+
+    <!-- Spacing to prevent overlap -->
+    <div style="height: 25px;"></div>
+
+    <!-- Course Content -->
+    <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center width: 50px;">
+        <div class="main d-flex flex-column" style="flex: 1; line-height: 0.9; height: 85px; border-radius:10px; background-color:#C5C5C5; font-family:inria serif; padding: 17px 20px; text-align: center;">
+            <h6 style="color:#1F00BD; ">Learn SQL Basics</h6>
+            <p style="font-style:italic">Start your Journey to master database queries</p>
+        </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Card 1 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="~/images/sqlimag2.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Introduction to SQL</h5>
+                        <p class="card-text">Learn SQL basic concept and syntax</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="~/images/sqlimag.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Data Manipulation</h5>
+                        <p class="card-text">Master SQL basic queries</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="~/images/SQLTraining.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Joins & Relationships</h5>
+                        <p class="card-text">Master complex SQL queries and data manipulation techniques.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="d-flex justify-content-center pb-4">
+        <a asp-action="Login" asp-controller="Account"
+           class="btn text-white mt-4" style="background-color:#7A046A; font-family:inria serif; font-size: 18px; font-weight: bold; border-radius:10px;">
+            View Courses
+        </a>
+    </div>
+</div>
+
+<!--Progress track-->
+<div class="position-relative d-flex flex-column align-items-center" style="background-color:#FFDCD1; padding: 50px 20px; min-height:580px;">
+    <!-- Courses text at the top center -->
+    <div class="position-absolute pt-5 top-0 start-50 translate-middle-x" style="text-align: center; padding-top: 20px;">
+        <h2 style="">Progress Status</h2>
+    </div>
+
+    <!-- Spacing to prevent overlap -->
+    <div style="height: 25px;"></div>
+
+    <!-- Cards Section -->
+    <div class="container-fluid mt-5">
+        <div class="p-3">
+            <h5 style="">DataBase Basics</h5>
+            <div class="progress mb-4" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar bg-success text-white text-center" style="width: 25%">25%</div>
+            </div>
+
+            <h5 style="">SQL Queries</h5>
+            <div class="progress mb-4" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar bg-info text-dark text-center" style="width: 50%">50%</div>
+            </div>
+
+            <h5 style="">SQL Joins & Relationships</h5>
+            <div class="progress mb-4" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar bg-warning text-dark text-center" style="width: 10%">10%</div>
+            </div>
+
+            <h5 style="">Advanced SQL</h5>
+            <div class="progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar bg-danger text-white text-center" style="width: 0%">0%</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonial Section -->
+<div class="position-relative d-flex flex-column align-items-center" style="background-color:#D9D9D9; padding: 50px 20px; min-height:580px;">
+    <!-- Courses text at the top center -->
+    <div class="position-absolute pt-5 top-0 start-50 translate-middle-x" style="text-align: center; padding-top: 10px;">
+        <h2 style="">Students Success Story</h2>
+    </div>
+
+    <!-- Spacing to prevent overlap -->
+    <div style="height: 25px;"></div>
+
+    <!-- Cards Section -->
+    <div class="container mt-5">
+        <div class="row row-cols-1 p-4 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Card 1 -->
+            <div class="col">
+                <div class="card h-100" style="background-color: #F1D5D5;">
+                    <div class="d-flex justify-content-center">
+                        <img src="~/images/testimag2.png" style="height:200px; border-radius:100%; width: 200px;" class="card-img-top pt-2" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">"This course helped me landed my first database administrator job!"</p>
+                        <p class="card-text">
+                            <span style="font-weight: bold; display: block; line-height: 0.7;">Sarah K.</span>
+                            <span style="font-size: 14px; line-height: 0.7;">Data Analyst</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col">
+                <div class="card h-100" style="background-color:#F1D5D5;">
+                    <div class="d-flex justify-content-center">
+                        <img src="~/images/testimag1.png" style="height:195px; border-radius:100%; width: 200px;" class="card-img-top pt-2" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">"Clear explanation and practical exercise made learning SQL easy"</p>
+                        <p class="card-text">
+                            <span style="font-weight: bold; display: block; line-height: 0.7;">Kelvin M.</span>
+                            <span style="font-size: 14px; line-height: 0.7;">Student</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col">
+                <div class="card h-100" style="background-color: #F1D5D5;">
+                    <div class="d-flex justify-content-center">
+                        <img src="~/images/testimag2.png" style="height:200px; border-radius:100%; width: 200px;" class="card-img-top pt-2" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">"Perfect for beginners! The interactive exercise are fantastic."</p>
+                        <p class="card-text">
+                            <span style="font-weight: bold; display: block; line-height: 0.7;">Lisa M.</span>
+                            <span style="font-size: 14px; line-height: 0.7;">Student</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

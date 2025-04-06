@@ -1,0 +1,48 @@
+﻿@model E_LearningProject.Models.CourseViewModel
+
+@{
+    ViewData["Title"] = "Course Details";
+}
+
+<div class="container mt-5 pt-4" style="background-color:#D9D9D9; padding: 50px 20px; min-height: 100vh">
+
+    <!-- Display Course Description -->
+    <div class="card mt-5 p-3">
+    <h2>@Model.Course.CourseName</h2>
+        @if (!string.IsNullOrEmpty(Model.CourseDescription))
+        {
+            @* <p style="text-align:justify">@Model.CourseDescription</p> *@
+            <div style="text-align:justify">@Html.Raw(Model.CourseDescription)</div>
+
+        }
+        else
+        {
+            <p>No course description available.</p>
+        }
+        <br />
+
+        @if (!string.IsNullOrEmpty(Model.Course.YouTubeUrl))
+        {
+            <p><strong>Want to learn more:</strong> <a href="@Model.Course.YouTubeUrl" target="_blank">Click here to watch the video</a></p>
+        }
+    </div>
+
+    <!-- Spacing to prevent overlap -->
+    <div style="height: 25px;"></div>
+
+    <a href="@Url.Action("Details", "Quiz", new { id = Model.Course.Id })" class="btn btn-primary">
+        Take Quiz
+    </a>
+
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="text-end mt-5">
+            <a href="@Url.Action("Create", "Quiz", new { id = Model.Course.Id })" class="btn text-white" style="background-color:#7A046A; font-family:inria serif; font-weight: bold; border-radius:10px;">
+                Create New Quiz
+            </a>
+        </div>
+    }
+   
+</div>
+
