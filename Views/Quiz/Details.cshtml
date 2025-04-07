@@ -27,7 +27,9 @@
                     <p id="result_@question.Id" class="mt-2 text-danger"></p>
                 </li>
                 }
-            <button type="button" id="submit-quiz" class="w-100 btn btn-primary mt-3">Submit Quiz</button>
+      @*       <button type="button" id="submit-quiz" class="w-100 btn btn-primary mt-3">Submit Quiz</button> *@
+                <button id="submit-quiz" style="background-color:#7A046A; color:white; font-family:inria serif; font-weight: bold; border-radius:10px;" type="button">Submit Quiz</button>
+
             <p id="quiz-result" class="mt-3"></p>
         </form>
 
@@ -36,9 +38,8 @@
             Mark as Completed
         </button>
 
-        <button type="button" id="retake-quiz" class="w-100 btn btn-secondary mt-2" style="display:none;">
-            Retake Quiz
-        </button>
+        <button type="button" id="retake-quiz" style="display:none; background-color:#7A046A; color:white; font-family:inria serif; font-weight: bold; border-radius:10px;" type="button">Retake Quiz</button>
+
     }
     else
     {

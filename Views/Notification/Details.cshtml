@@ -1,0 +1,49 @@
+﻿@model E_LearningProject.Entities.Notification
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container mt-5 pt-4" style="background-color:#D9D9D9; padding: 50px 20px; min-height: 100vh">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4" style="background-color:#FFFFFF;">
+                <h4 style="text-align:center; color:darkblue;">Notification Details</h4>
+
+                <!-- Table-like layout -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Message</th>
+                            <th>Date Added</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.Message</td>
+                            <td>@Model.CreatedAt.ToString("g")</td>
+                            <td>
+                                @if (Model.IsRead)
+                                {
+                                    <span class="text-success">Read</span>
+                                }
+                                else
+                                {
+                                    <a asp-action="MarkNotificationAsRead" asp-route-notificationId="@Model.Id" class="btn btn-sm btn-primary">Mark as Read</a>
+
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-center pb-4">
+                    <a href="@Url.Action("MyLearning", "Account")" class="btn text-white" style="background-color:#7A046A; font-family:inria serif; font-weight: bold; border-radius:10px;">
+                        Back to Learning
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

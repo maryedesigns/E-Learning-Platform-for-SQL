@@ -51,5 +51,18 @@ namespace E_LearningProject.Controllers
             return RedirectToAction("Index");  // Redirect back to notifications page or wherever appropriate
         }
 
+        public IActionResult Details(int id)
+        {
+            var notification = _context.Notifications
+                .FirstOrDefault(c => c.Id == id);
+
+            if (notification == null)
+            {
+                return NotFound();
+            }
+
+            return View(notification);
+        }
+
     }
 }
