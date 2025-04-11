@@ -523,6 +523,8 @@ namespace E_LearningProject.Controllers
                 .Where(c => c.CourseName.Contains(query) || c.Description.Contains(query))
                 .ToList();
 
+            ViewBag.Query = query;
+
             return View("SearchResults", results);
         }
 

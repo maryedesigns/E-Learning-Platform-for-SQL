@@ -24,7 +24,7 @@
             <div style="height: 20px;"></div>
             @if (Model == null || !Model.Any())
             {
-                <h3>You don't have any courses yet .</h3>
+                <h6>You don't have any courses yet click <a href="@Url.Action("StartLearning", "Account")">View Courses</a> to get started</h6>
             }
             else
             {
