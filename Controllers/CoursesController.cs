@@ -27,12 +27,12 @@ namespace E_LearningProject.Controllers
 
         public IActionResult Index()
         {
-            var courses = _context.Courses.ToList();  // Fetch the list of courses
-            return View(courses);  // Pass them to the view
+            var courses = _context.Courses.ToList(); 
+            return View(courses);
         }
 
         // GET: Course/Create
-        [Authorize(Roles = "Admin")] // Ensures that only authenticated users can create courses
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -133,7 +133,6 @@ namespace E_LearningProject.Controllers
 
                     await _context.SaveChangesAsync();
 
-                    // Redirect to another action after saving the course
                     return RedirectToAction("StartLearning", "Account");
                 }
                 catch (Exception ex)
@@ -142,7 +141,7 @@ namespace E_LearningProject.Controllers
                 }
             }
 
-            return View(courses);  // Return the same view if the model is invalid
+            return View(courses); 
         }
 
 
@@ -172,7 +171,7 @@ namespace E_LearningProject.Controllers
             var viewModel = new CourseViewModel
             {
                 Course = course,
-                CourseDescription = extractedDescription, // Display HTML formatted content
+                CourseDescription = extractedDescription, 
                 Questions = course.QuizQuestions?.ToList()
             };
 
@@ -389,23 +388,20 @@ namespace E_LearningProject.Controllers
         [Authorize]
         public async Task<IActionResult> Enroll(int id)
         {
-            // Get the logged-in user's ID
+
             var userId = _userManager.GetUserId(User);
 
-            // Check if user is not authenticated (just for extra security)
             if (userId == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            // Check if the CourseId exists in the Courses table (prevents invalid enrollment)
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == id);
             if (course == null)
             {
-                return NotFound(); // Return 404 if course does not exist
+                return NotFound();
             }
 
-            // Check if the user is already enrolled in the course
             var existingEnrollment = await _context.MyLearnings
                 .FirstOrDefaultAsync(m => m.UserId == userId && m.CourseId == id);
 
@@ -419,19 +415,16 @@ namespace E_LearningProject.Controllers
                     Status = "Not Started",
                     IsCompleted = false,
                     EnrolledDate = DateTime.Now,
-                    TotalLessons = course.TotalLessons, // Automatically set the total lessons from course
+                    TotalLessons = course.TotalLessons, 
                     CompletedLessons = 0
                 };
 
-                // Save enrollment to the database
                 _context.MyLearnings.Add(enrollment);
                 await _context.SaveChangesAsync();
 
-                // Redirect to the course details page after enrollment
                 return RedirectToAction("MyLearning", "Account");
             }
 
-            // If user is already enrolled, redirect to their "My Learning" page
             return RedirectToAction("MyLearning", "Account");
         }
 
@@ -527,10 +520,7 @@ namespace E_LearningProject.Controllers
 
             return View("SearchResults", results);
         }
-
-
     }
-
 
 }
 

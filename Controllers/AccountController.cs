@@ -58,7 +58,7 @@ namespace E_LearningProject.Controllers
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, user.FullName), // Store Full Name in Claims
+                        new Claim(ClaimTypes.Name, user.FullName),
                         new Claim(ClaimTypes.Email, user.Email)
                     };
 
@@ -68,7 +68,6 @@ namespace E_LearningProject.Controllers
                     // Set TempData to show the success message in the view
                     TempData["SignupSuccess"] = "Account Created Successfully!";
 
-                    //return RedirectToAction("MyLearning");
                 }
 
                 foreach (var error in result.Errors)
@@ -100,13 +99,12 @@ namespace E_LearningProject.Controllers
                         // Adding Full Name to Claims
                         var claims = new List<Claim>
                         {
-                            new Claim("FullName", user.FullName) // Custom Claim for Full Name
+                            new Claim("FullName", user.FullName)
                         };
 
                         var claimsIdentity = new ClaimsIdentity(claims);
                         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-                        //await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, claimsPrincipal);
                         await _signInManager.SignInAsync(user, isPersistent: false);
 
                         return RedirectToAction("MyLearning");
@@ -123,16 +121,16 @@ namespace E_LearningProject.Controllers
         [Authorize]
         public async Task<IActionResult> MyLearning()
         {
-            var user = await _userManager.GetUserAsync(User); // Get current user
+            var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            ViewBag.Name = user.FullName;  // Use FullName from Identity
+            ViewBag.Name = user.FullName; 
             var myCourses = await _context.MyLearnings
                 .Include(m => m.Course)
-                .Where(m => m.UserId == user.Id) // Use Identity User ID
+                .Where(m => m.UserId == user.Id)
                 .ToListAsync();
 
             return View(myCourses);
@@ -149,9 +147,23 @@ namespace E_LearningProject.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            ViewBag.Name = user.FullName;  // Fetch FullName from Identity
-            var courses = await _context.Courses.ToListAsync(); // Fetch courses asynchronously
+            ViewBag.Name = user.FullName; 
+            var courses = await _context.Courses.ToListAsync(); 
+            var coursesViewModel = courses.Select(c => new Courses
+            {
+                Id = c.Id,
+                CourseName = c.CourseName,
+                Description = c.Description,
+                ImageUrl = c.ImageUrl,
+                YouTubeUrl = c.YouTubeUrl
+            }).ToList();
 
+            return View(coursesViewModel);
+        }
+
+        public async Task<IActionResult> ViewCourses()
+        {
+            var courses = await _context.Courses.ToListAsync();
             var coursesViewModel = courses.Select(c => new Courses
             {
                 Id = c.Id,
@@ -186,7 +198,7 @@ namespace E_LearningProject.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return RedirectToAction("Login", "Account"); // or another appropriate action
+                return RedirectToAction("Login", "Account");
             }
 
             var model = new EditProfileViewModel
@@ -196,7 +208,7 @@ namespace E_LearningProject.Controllers
                 ProfilePicturePath = user.ProfilePicturePath ?? "~/images/default-pic.png"
             };
 
-            return View(model); // Pass the model to the view
+            return View(model); 
         }
 
         [HttpPost]
@@ -326,7 +338,6 @@ namespace E_LearningProject.Controllers
 
             return View(model);
         }
-
 
     }
 }
