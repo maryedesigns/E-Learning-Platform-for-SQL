@@ -24,12 +24,13 @@ namespace E_LearningProject.ViewComponents
             if (user != null)
             {
                 notifications = await _context.Notifications
+                    .Where(n => n.UserId == user.Id && !n.IsRead)
                     .OrderByDescending(n => n.CreatedAt)
                     .Take(5)
                     .ToListAsync();
             }
 
-            ViewBag.UnreadCount = notifications.Count(n => !n.IsRead);
+            ViewBag.UnreadCount = notifications.Count;
             return View(notifications);
         }
     }

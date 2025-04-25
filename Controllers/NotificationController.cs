@@ -27,8 +27,8 @@ namespace E_LearningProject.Controllers
             }
 
             var notifications = await _context.Notifications
+                .Where(n => n.UserId == user.Id)
                 .OrderByDescending(n => n.CreatedAt)
-                .Take(5)
                 .ToListAsync();
 
             ViewBag.Notifications = notifications ?? new List<Notification>(); // Handle null safely
@@ -39,8 +39,14 @@ namespace E_LearningProject.Controllers
 
         public async Task<IActionResult> MarkNotificationAsRead(int notificationId)
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var notification = await _context.Notifications
-                .FirstOrDefaultAsync(n => n.Id == notificationId);
+                .FirstOrDefaultAsync(n => n.Id == notificationId && n.UserId == user.Id);
 
             if (notification != null)
             {

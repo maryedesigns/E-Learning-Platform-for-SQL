@@ -8,12 +8,10 @@
 
     <!-- Display Course Description -->
     <div class="card mt-5 p-3">
-    <h2>@Model.Course.CourseName</h2>
+        <h3 style="text-align:center"><u>@Model.Course.CourseName Course</u></h3>&nbsp;
         @if (!string.IsNullOrEmpty(Model.CourseDescription))
         {
-            @* <p style="text-align:justify">@Model.CourseDescription</p> *@
             <div style="text-align:justify">@Html.Raw(Model.CourseDescription)</div>
-
         }
         else
         {

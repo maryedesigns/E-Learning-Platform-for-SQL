@@ -35,10 +35,6 @@ html {
   min-height: 100%;
 }
 
-/*body {
-  margin-bottom: 60px;
-}*/
-
 .small-text {
     font-size: 0.75em; /* Makes it smaller */
     display: block; /* Ensures it appears on a new line */
@@ -73,3 +69,11 @@ body {
     height: 200px;
     object-fit: cover;
 }
+
+select option {
+    white-space: pre-wrap; /* Allow line breaks */
+    padding: 10px;
+    font-family: monospace;
+}
+
+

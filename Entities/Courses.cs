@@ -20,7 +20,7 @@ namespace E_LearningProject.Entities
         [Display(Name = "You Tube URL")]
         public string YouTubeUrl { get; set; }
 
-        public int TotalLessons { get; set; } = 10;  // Default is 10 lessons
+        public int TotalLessons { get; set; } = 10;
 
         public ICollection<QuizQuestions> ? QuizQuestions { get; set; }  // Link to quiz questions
 
