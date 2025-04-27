@@ -285,7 +285,7 @@ namespace E_LearningProject.Controllers
                         {
                             string base64Image = Convert.ToBase64String(imageBytes);
                             string mimeType = "image/png";
-                            string imgTag = $"<img src='data:{mimeType};base64,{base64Image}' alt='Image' style='width: 500px; height: auto; margin: 3px;' />";
+                            string imgTag = $"<div style='text-align: center; margin: 10px 0;'><img src='data:{mimeType};base64,{base64Image}' alt='Image' style='max-width: 90%; height: auto;' /></div>";
                             imageTags.Add(imgTag);
                         }
                     }
